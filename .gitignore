@@ -1,0 +1,4 @@
+.metadata
+*.pyc
+lab0/.*
+
