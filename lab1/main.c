@@ -19,6 +19,7 @@ int main(void)
 	//PORTA = 0x00; //diody mają z drugiej strony high, trzeba ustawić low by była różnica napięć
 	DDRD = 0x00;
 	PORTC = 0b01101000;
+	PORTD = 0xFF; //REZYSTORY PODCIAGAJACE
 
 	while(1)
 	{
