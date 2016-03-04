@@ -17,10 +17,20 @@ int main(void)
 
 	//aby ustawić wszystkie na on:
 	//PORTA = 0x00; //diody mają z drugiej strony high, trzeba ustawić low by była różnica napięć
+	DDRD = 0x00;
+	PORTC = 0b01101000;
 
-	PORTC = ~0b10010111;
 	while(1)
-	{}
+	{
+		if (!(PIND & (1<<PD0))) //pind - odczyt ze switcha
+		{
+			PORTC = 0b01101000; //zapis na wyjście C
+		}
+		else
+		{
+			PORTC = ~0b01101000;
+		}
+	}
 //	while(1)
 //	{
 //		PORTA = 0xFF;
