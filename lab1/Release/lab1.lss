@@ -3,11 +3,11 @@ lab1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000008a  00000000  00000000  00000074  2**1
+  0 .text         000000b0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  0000008a  000000fe  2**0
+  1 .data         00000000  00800060  000000b0  00000124  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000011  00000000  00000000  000000fe  2**0
+  2 .comment      00000011  00000000  00000000  00000124  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -42,29 +42,48 @@ Disassembly of section .text:
   5a:	d8 e0       	ldi	r29, 0x08	; 8
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
-  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
-  64:	0c 94 43 00 	jmp	0x86	; 0x86 <_exit>
+  60:	0e 94 45 00 	call	0x8a	; 0x8a <main>
+  64:	0c 94 56 00 	jmp	0xac	; 0xac <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-0000006c <main>:
-  6c:	8f ef       	ldi	r24, 0xFF	; 255
-  6e:	84 bb       	out	0x14, r24	; 20
-  70:	11 ba       	out	0x11, r1	; 17
-  72:	88 e6       	ldi	r24, 0x68	; 104
-  74:	85 bb       	out	0x15, r24	; 21
-  76:	87 e9       	ldi	r24, 0x97	; 151
-  78:	98 e6       	ldi	r25, 0x68	; 104
-  7a:	80 99       	sbic	0x10, 0	; 16
-  7c:	02 c0       	rjmp	.+4      	; 0x82 <main+0x16>
-  7e:	95 bb       	out	0x15, r25	; 21
-  80:	fc cf       	rjmp	.-8      	; 0x7a <main+0xe>
-  82:	85 bb       	out	0x15, r24	; 21
-  84:	fa cf       	rjmp	.-12     	; 0x7a <main+0xe>
+0000006c <longdelay>:
+  6c:	20 e0       	ldi	r18, 0x00	; 0
+  6e:	30 e0       	ldi	r19, 0x00	; 0
+  70:	28 17       	cp	r18, r24
+  72:	39 07       	cpc	r19, r25
+  74:	49 f0       	breq	.+18     	; 0x88 <longdelay+0x1c>
+  76:	ec ec       	ldi	r30, 0xCC	; 204
+  78:	fa e0       	ldi	r31, 0x0A	; 10
+  7a:	31 97       	sbiw	r30, 0x01	; 1
+  7c:	f1 f7       	brne	.-4      	; 0x7a <longdelay+0xe>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <longdelay+0x14>
+  80:	00 00       	nop
+  82:	2f 5f       	subi	r18, 0xFF	; 255
+  84:	3f 4f       	sbci	r19, 0xFF	; 255
+  86:	f4 cf       	rjmp	.-24     	; 0x70 <longdelay+0x4>
+  88:	08 95       	ret
 
-00000086 <_exit>:
-  86:	f8 94       	cli
+0000008a <main>:
+  8a:	8f ef       	ldi	r24, 0xFF	; 255
+  8c:	84 bb       	out	0x14, r24	; 20
+  8e:	88 e6       	ldi	r24, 0x68	; 104
+  90:	85 bb       	out	0x15, r24	; 21
+  92:	c8 e6       	ldi	r28, 0x68	; 104
+  94:	d7 e9       	ldi	r29, 0x97	; 151
+  96:	88 ee       	ldi	r24, 0xE8	; 232
+  98:	93 e0       	ldi	r25, 0x03	; 3
+  9a:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
+  9e:	c5 bb       	out	0x15, r28	; 21
+  a0:	88 ee       	ldi	r24, 0xE8	; 232
+  a2:	93 e0       	ldi	r25, 0x03	; 3
+  a4:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
+  a8:	d5 bb       	out	0x15, r29	; 21
+  aa:	f5 cf       	rjmp	.-22     	; 0x96 <main+0xc>
 
-00000088 <__stop_program>:
-  88:	ff cf       	rjmp	.-2      	; 0x88 <__stop_program>
+000000ac <_exit>:
+  ac:	f8 94       	cli
+
+000000ae <__stop_program>:
+  ae:	ff cf       	rjmp	.-2      	; 0xae <__stop_program>

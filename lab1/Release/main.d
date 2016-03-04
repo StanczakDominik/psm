@@ -1,1 +1,3 @@
-main.d: ../main.c
+main.d: ../main.c ../longdelay.h
+
+../longdelay.h:
