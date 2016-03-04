@@ -3,11 +3,11 @@ lab1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000000b0  00000000  00000000  00000074  2**1
+  0 .text         00000140  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  000000b0  00000124  2**0
+  1 .data         00000000  00800060  00000140  000001b4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000011  00000000  00000000  00000124  2**0
+  2 .comment      00000011  00000000  00000000  000001b4  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -43,7 +43,7 @@ Disassembly of section .text:
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
   60:	0e 94 45 00 	call	0x8a	; 0x8a <main>
-  64:	0c 94 56 00 	jmp	0xac	; 0xac <_exit>
+  64:	0c 94 9e 00 	jmp	0x13c	; 0x13c <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -68,22 +68,98 @@ Disassembly of section .text:
 0000008a <main>:
   8a:	8f ef       	ldi	r24, 0xFF	; 255
   8c:	84 bb       	out	0x14, r24	; 20
-  8e:	88 e6       	ldi	r24, 0x68	; 104
-  90:	85 bb       	out	0x15, r24	; 21
-  92:	c8 e6       	ldi	r28, 0x68	; 104
-  94:	d7 e9       	ldi	r29, 0x97	; 151
-  96:	88 ee       	ldi	r24, 0xE8	; 232
-  98:	93 e0       	ldi	r25, 0x03	; 3
-  9a:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
-  9e:	c5 bb       	out	0x15, r28	; 21
-  a0:	88 ee       	ldi	r24, 0xE8	; 232
-  a2:	93 e0       	ldi	r25, 0x03	; 3
-  a4:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
-  a8:	d5 bb       	out	0x15, r29	; 21
-  aa:	f5 cf       	rjmp	.-22     	; 0x96 <main+0xc>
+  8e:	11 ba       	out	0x11, r1	; 17
+  90:	82 bb       	out	0x12, r24	; 18
+  92:	dd 24       	eor	r13, r13
+  94:	d3 94       	inc	r13
+  96:	ca e0       	ldi	r28, 0x0A	; 10
+  98:	d0 e0       	ldi	r29, 0x00	; 0
+  9a:	e1 2c       	mov	r14, r1
+  9c:	43 e0       	ldi	r20, 0x03	; 3
+  9e:	f4 2e       	mov	r15, r20
+  a0:	02 e3       	ldi	r16, 0x32	; 50
+  a2:	10 e0       	ldi	r17, 0x00	; 0
+  a4:	80 99       	sbic	0x10, 0	; 16
+  a6:	0a c0       	rjmp	.+20     	; 0xbc <main+0x32>
+  a8:	84 e6       	ldi	r24, 0x64	; 100
+  aa:	90 e0       	ldi	r25, 0x00	; 0
+  ac:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
+  b0:	80 99       	sbic	0x10, 0	; 16
+  b2:	04 c0       	rjmp	.+8      	; 0xbc <main+0x32>
+  b4:	e3 94       	inc	r14
+  b6:	8e 2d       	mov	r24, r14
+  b8:	81 70       	andi	r24, 0x01	; 1
+  ba:	e8 2e       	mov	r14, r24
+  bc:	81 99       	sbic	0x10, 1	; 16
+  be:	06 c0       	rjmp	.+12     	; 0xcc <main+0x42>
+  c0:	ce 01       	movw	r24, r28
+  c2:	02 96       	adiw	r24, 0x02	; 2
+  c4:	b8 01       	movw	r22, r16
+  c6:	0e 94 8a 00 	call	0x114	; 0x114 <__udivmodhi4>
+  ca:	ec 01       	movw	r28, r24
+  cc:	82 99       	sbic	0x10, 2	; 16
+  ce:	0a c0       	rjmp	.+20     	; 0xe4 <main+0x5a>
+  d0:	84 e6       	ldi	r24, 0x64	; 100
+  d2:	90 e0       	ldi	r25, 0x00	; 0
+  d4:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
+  d8:	82 99       	sbic	0x10, 2	; 16
+  da:	04 c0       	rjmp	.+8      	; 0xe4 <main+0x5a>
+  dc:	d3 94       	inc	r13
+  de:	8d 2d       	mov	r24, r13
+  e0:	81 70       	andi	r24, 0x01	; 1
+  e2:	d8 2e       	mov	r13, r24
+  e4:	ee 20       	and	r14, r14
+  e6:	f1 f2       	breq	.-68     	; 0xa4 <main+0x1a>
+  e8:	8f 2d       	mov	r24, r15
+  ea:	90 e0       	ldi	r25, 0x00	; 0
+  ec:	dd 20       	and	r13, r13
+  ee:	31 f0       	breq	.+12     	; 0xfc <main+0x72>
+  f0:	88 0f       	add	r24, r24
+  f2:	99 1f       	adc	r25, r25
+  f4:	f6 94       	lsr	r15
+  f6:	f6 94       	lsr	r15
+  f8:	f6 94       	lsr	r15
+  fa:	06 c0       	rjmp	.+12     	; 0x108 <main+0x7e>
+  fc:	23 e0       	ldi	r18, 0x03	; 3
+  fe:	88 0f       	add	r24, r24
+ 100:	99 1f       	adc	r25, r25
+ 102:	2a 95       	dec	r18
+ 104:	e1 f7       	brne	.-8      	; 0xfe <main+0x74>
+ 106:	f6 94       	lsr	r15
+ 108:	f8 2a       	or	r15, r24
+ 10a:	f5 ba       	out	0x15, r15	; 21
+ 10c:	ce 01       	movw	r24, r28
+ 10e:	0e 94 36 00 	call	0x6c	; 0x6c <longdelay>
+ 112:	c8 cf       	rjmp	.-112    	; 0xa4 <main+0x1a>
 
-000000ac <_exit>:
-  ac:	f8 94       	cli
+00000114 <__udivmodhi4>:
+ 114:	aa 1b       	sub	r26, r26
+ 116:	bb 1b       	sub	r27, r27
+ 118:	51 e1       	ldi	r21, 0x11	; 17
+ 11a:	07 c0       	rjmp	.+14     	; 0x12a <__udivmodhi4_ep>
 
-000000ae <__stop_program>:
-  ae:	ff cf       	rjmp	.-2      	; 0xae <__stop_program>
+0000011c <__udivmodhi4_loop>:
+ 11c:	aa 1f       	adc	r26, r26
+ 11e:	bb 1f       	adc	r27, r27
+ 120:	a6 17       	cp	r26, r22
+ 122:	b7 07       	cpc	r27, r23
+ 124:	10 f0       	brcs	.+4      	; 0x12a <__udivmodhi4_ep>
+ 126:	a6 1b       	sub	r26, r22
+ 128:	b7 0b       	sbc	r27, r23
+
+0000012a <__udivmodhi4_ep>:
+ 12a:	88 1f       	adc	r24, r24
+ 12c:	99 1f       	adc	r25, r25
+ 12e:	5a 95       	dec	r21
+ 130:	a9 f7       	brne	.-22     	; 0x11c <__udivmodhi4_loop>
+ 132:	80 95       	com	r24
+ 134:	90 95       	com	r25
+ 136:	bc 01       	movw	r22, r24
+ 138:	cd 01       	movw	r24, r26
+ 13a:	08 95       	ret
+
+0000013c <_exit>:
+ 13c:	f8 94       	cli
+
+0000013e <__stop_program>:
+ 13e:	ff cf       	rjmp	.-2      	; 0x13e <__stop_program>
