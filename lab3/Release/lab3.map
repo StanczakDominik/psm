@@ -115,7 +115,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x116
+.text           0x0000000000000000      0x186
  *(.vectors)
  .vectors       0x0000000000000000       0x54 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm32.o
                 0x0000000000000000                __vectors
@@ -193,44 +193,44 @@ END GROUP
  .text          0x000000000000006c        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
                 0x000000000000006c                . = ALIGN (0x2)
  *(.text.*)
- .text.lcdinit  0x000000000000006c        0x2 ./lcd.o
-                0x000000000000006c                lcdinit
  .text.lcd_write_instr
-                0x000000000000006e       0x4c ./lcd.o
-                0x000000000000006e                lcd_write_instr
+                0x000000000000006c       0x58 ./lcd.o
+                0x000000000000006c                lcd_write_instr
+ .text.lcdinit  0x00000000000000c4       0x5a ./lcd.o
+                0x00000000000000c4                lcdinit
  .text.lcd_clear
-                0x00000000000000ba        0x2 ./lcd.o
-                0x00000000000000ba                lcd_clear
+                0x000000000000011e        0x2 ./lcd.o
+                0x000000000000011e                lcd_clear
  .text.lcd_write_data
-                0x00000000000000bc       0x4c ./lcd.o
-                0x00000000000000bc                lcd_write_data
+                0x0000000000000120       0x58 ./lcd.o
+                0x0000000000000120                lcd_write_data
  .text.lcd_set_xy
-                0x0000000000000108        0x2 ./lcd.o
-                0x0000000000000108                lcd_set_xy
+                0x0000000000000178        0x2 ./lcd.o
+                0x0000000000000178                lcd_set_xy
  .text.lcd_write_text_xy
-                0x000000000000010a        0x2 ./lcd.o
-                0x000000000000010a                lcd_write_text_xy
+                0x000000000000017a        0x2 ./lcd.o
+                0x000000000000017a                lcd_write_text_xy
  .text.startup.main
-                0x000000000000010c        0x6 ./lcd.o
-                0x000000000000010c                main
+                0x000000000000017c        0x6 ./lcd.o
+                0x000000000000017c                main
  .text.libgcc.mul
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
-                0x0000000000000112                . = ALIGN (0x2)
+                0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000112        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
-                0x0000000000000112                exit
-                0x0000000000000112                _exit
+ .fini9         0x0000000000000182        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x0000000000000182                exit
+                0x0000000000000182                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -249,11 +249,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000112        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000000000000182        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000000116                _etext = .
+                0x0000000000000186                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x0000000000000116
+.data           0x0000000000800060        0x0 load address 0x0000000000000186
                 0x0000000000800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm32.o
@@ -276,8 +276,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 0x0000000000800060                PROVIDE (__bss_end, .)
-                0x0000000000000116                __data_load_start = LOADADDR (.data)
-                0x0000000000000116                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000000186                __data_load_start = LOADADDR (.data)
+                0x0000000000000186                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800060        0x0
                 0x0000000000800060                PROVIDE (__noinit_start, .)
