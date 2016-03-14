@@ -11,14 +11,14 @@ void lcdinit(void)
 	//init wyświetlacz
 	delay_ms_(45);
 
-	LCD_PORT |= (1<<LCD_E);
-	LCD_PORT = (LCD_PORT & 0x0F) | (3);
-	delay_(1);
-	LCD_PORT &= ~(1<<LCD_E);
-
+	lcd_write_instr(3);
 	delay_ms_(5);
-	//TODO
-
+	lcd_write_instr(3);
+	delay_ms_(5);
+	lcd_write_instr(3);
+	delay_ms_(5);
+	lcd_write_instr(2);
+	delay_ms_(1);
 }
 
 
@@ -78,7 +78,6 @@ void lcd_set_xy(uint8_t r, uint8_t k)
 void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
 {
 	//wypisz tekst w danym miejscu
-
 }
 
 int main()
