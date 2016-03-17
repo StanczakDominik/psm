@@ -28,7 +28,7 @@ void lcdinit(void)
 	lcd_write_instr(0x28);
 	lcd_write_instr(0x08);   //0b00001010 - migający kursor
 	lcd_write_instr(0x01);	 //czyść i przenieś na początek, jak lcd_clear
-	lcd_write_instr(0x06);	 //co sie stanie jak 0b00000111?
+	lcd_write_instr(0x06);	 //co sie stanie jak 0b00000111? //0x06
 	lcd_write_instr(0x0F);   //włącz all
 	_delay_ms(1);
 }
@@ -88,19 +88,10 @@ void lcd_set_xy(uint8_t k, uint8_t r)
 }
 void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
 {
-	int x = k;
-	int y = r;
 	lcd_set_xy(r,k);
 	while(*text)
 	{
 		lcd_write_data(*text);
-		x++;
-		if (x==16)
-		{
-			x = 0;
-			y = 1-y;
-			lcd_set_xy(x,y);
-		}
 		text++;
 		_delay_ms(100);
 	}
@@ -109,10 +100,11 @@ void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
 int main()
 {
 	lcdinit();
-	lcd_write_text_xy(0,0,"konstantynopolitanczykowianeczka");
-	int i = 0;
+	lcd_write_text_xy(16,0,"konstantynopolitanczykowianeczka");
 	while(1)
 	{
+		lcd_write_instr(0b00011000);
+		_delay_ms(200);
 	}
 
 }
