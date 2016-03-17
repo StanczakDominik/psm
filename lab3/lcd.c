@@ -82,17 +82,27 @@ void lcd_write_data(uint8_t data)
 	_delay_us(500);
 }
 
-void lcd_set_xy(uint8_t r, uint8_t k)
+void lcd_set_xy(uint8_t k, uint8_t r)
 {
 	lcd_write_instr(0x80 + 0x40*r + k);
 }
 void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
 {
+	int x = k;
+	int y = r;
 	lcd_set_xy(r,k);
 	while(*text)
 	{
 		lcd_write_data(*text);
+		x++;
+		if (x==16)
+		{
+			x = 0;
+			y = 1-y;
+			lcd_set_xy(x,y);
+		}
 		text++;
+		_delay_ms(100);
 	}
 }
 
