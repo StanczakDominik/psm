@@ -15,6 +15,7 @@
 #define LCD_PORT PORTA
 #define LCD_RS 2
 #define LCD_E 3
+#define LCD_DDR DDRA
 
 void lcdinit(void);
 void lcd_write_instr(uint8_t);
