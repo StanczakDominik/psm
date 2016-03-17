@@ -1,0 +1,4 @@
+avr c linker
+-Wl,-u,vfprintf
+
+libraries: printf_flt

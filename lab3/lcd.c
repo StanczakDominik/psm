@@ -84,6 +84,7 @@ void lcd_write_data(uint8_t data)
 
 void lcd_set_xy(uint8_t k, uint8_t r)
 {
+
 	lcd_write_instr(0x80 + 0x40*r + k);
 }
 void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
@@ -108,15 +109,27 @@ FILE lcd_stream=FDEV_SETUP_STREAM (lcd_putc, NULL, _FDEV_SETUP_WRITE);
 int main()
 {
 	lcdinit();
-	int i = 0;
+	lcd_write_instr(0x40);
+	lcd_write_data(0b00000000);
+	lcd_write_data(0b00010010);
+	lcd_write_data(0b00001010);
+	lcd_write_data(0b00000000);
+	lcd_write_data(0b00000000);
+	lcd_write_data(0b00010001);
+	lcd_write_data(0b00001110);
+	lcd_write_data(0b00000000);
+	lcd_set_xy(0,0);
+	lcd_write_data(0);
+//	fprintf(&lcd_stream, "liczba: %4f", 3.14);
 	while(1)
 	{
-		lcd_set_xy(0,0);
-		_delay_ms(100);
-		fprintf(&lcd_stream, "liczba: %4d", i++);
-		_delay_ms(100);
-		lcd_write_instr(0x1c); // przesuwa w prawo
-//		lcd_write_instr(0x18); przesuwa w lewo
+		lcd_write_instr(0x41);
+		lcd_write_data(0b00001010);
+		_delay_ms(1000);
+
+		lcd_write_instr(0x41);
+		lcd_write_data(0b00010010);
+		_delay_ms(1000);
 	}
 
 
