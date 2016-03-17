@@ -97,14 +97,28 @@ void lcd_write_text_xy(uint8_t r, uint8_t k, char* text)
 	}
 }
 
+int lcd_putc(char c, FILE *unused)
+{
+	lcd_write_data(c);
+	return 0;
+}
+
+FILE lcd_stream=FDEV_SETUP_STREAM (lcd_putc, NULL, _FDEV_SETUP_WRITE);
+
 int main()
 {
 	lcdinit();
-	lcd_write_text_xy(16,0,"konstantynopolitanczykowianeczka");
+	int i = 0;
 	while(1)
 	{
-		lcd_write_instr(0b00011000);
-		_delay_ms(200);
+		lcd_set_xy(0,0);
+		_delay_ms(100);
+		fprintf(&lcd_stream, "liczba: %4d", i++);
+		_delay_ms(100);
+		lcd_write_instr(0x1c); // przesuwa w prawo
+//		lcd_write_instr(0x18); przesuwa w lewo
 	}
+
+
 
 }

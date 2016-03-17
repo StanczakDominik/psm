@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 
 #define LCD_PORT PORTA
 #define LCD_RS 2
@@ -23,4 +24,5 @@ void lcd_clear(void);
 void lcd_write_data(uint8_t);
 void lcd_set_xy(uint8_t, uint8_t);
 void lcd_write_text_xy(uint8_t, uint8_t, char*);
+int lcd_putc(char, FILE*);
 #endif /* LCD_H_ */
