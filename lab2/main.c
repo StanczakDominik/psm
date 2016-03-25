@@ -32,10 +32,10 @@ int main(void)
 	MCUCR |= (1<< ISC01);
 	GICR |= (1<<INT0); //wlaczamy, wylaczamy mozliwosci roznych przerwan
 
-	DDRC = 0xFF;
+	DDRC = 0xFF; //wyjscie
 
-	DDRD = 0x00;
-	PORTD = 0xFF;
+	DDRD = 0x00; //wejscie
+	PORTD = 0xFF; //rezystorki na wejsciu
 
 	while(1)
 	{
