@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
+#include <avr/pgmspace.h>
 
 #define LCD_PORT PORTA
 #define LCD_RS 2

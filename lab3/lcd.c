@@ -103,23 +103,14 @@ int lcd_putc(char c, FILE *unused)
 	lcd_write_data(c);
 	return 0;
 }
+char konstantynopol[] PROGMEM = "Konstantynopolitanczykowianeczka";
 
 FILE lcd_stream=FDEV_SETUP_STREAM (lcd_putc, NULL, _FDEV_SETUP_WRITE);
 
 int main()
 {
 	lcdinit();
-	lcd_write_instr(0x40);
-	lcd_write_data(0b00000000);
-	lcd_write_data(0b00010010);
-	lcd_write_data(0b00001010);
-	lcd_write_data(0b00000000);
-	lcd_write_data(0b00000000);
-	lcd_write_data(0b00010001);
-	lcd_write_data(0b00001110);
-	lcd_write_data(0b00000000);
-	lcd_set_xy(0,0);
-	lcd_write_data(0);
+	lcd_write_text_xy(0,0,konstantynopol);
 //	fprintf(&lcd_stream, "liczba: %4f", 3.14);
 	while(1)
 	{
