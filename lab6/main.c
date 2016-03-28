@@ -12,32 +12,23 @@
 #include <util/delay.h>
 #include <string.h>
 #include "lcd.h"
-
-#define MOSI PB5
-#define SCK PB7
-#define SS PB4
+#include "spi.h"
 
 uint16_t liczba;
-
-void InitSPI (void)
-{
-	//kierunek wyjscia na MOSI (na MISO nie trzeba bo default)
-	DDRB |= (1<<MOSI) | (1<<SCK)|(1<<SS);
-	// aktywacja SPI, tryb Master, predkosc zegara Fosc/64
-	SPCR |= (1<<SPE) | (1<<MSTR) | (1<<SPR1);
-}
-
-uint8_t TransferSPI(uint8_t bajt)
-{
-	SPDR = bajt;
-
-	// czekamy na ustawienie flagi SPIF po zakończeniu transmisji
-	while( !(SPSR & (1<<SPIF)));
-
-	return SPDR;
-}
+float v_in;
 
 int main()
 {
+	lcdinit();
+	InitSPI();
+	while(1)
+	{
+		TransferSPI(1);
+		uint16_t high = TransferSPI(0xA0);
+		uint16_t low = TransferSPI(0);
+		liczba = (high<<8) | low;
+		v_in = liczba * 5.0 / 4096.0;
 
+		//lcd fprintf
+	}
 }
