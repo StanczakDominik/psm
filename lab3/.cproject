@@ -37,7 +37,7 @@
 								<option id="de.innot.avreclipse.cppcompiler.option.optimize.2146746290" name="Optimization Level" superClass="de.innot.avreclipse.cppcompiler.option.optimize" value="de.innot.avreclipse.cppcompiler.optimize.size" valueType="enumerated"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.linker.winavr.app.release.2073177033" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.release">
-								<option id="de.innot.avreclipse.linker.option.otherlinkargs.1977634348" name="Other Arguments" superClass="de.innot.avreclipse.linker.option.otherlinkargs" value="" valueType="string"/>
+								<option id="de.innot.avreclipse.linker.option.otherlinkargs.1977634348" name="Other Arguments" superClass="de.innot.avreclipse.linker.option.otherlinkargs" value="-Wl,-u,vfprintf" valueType="string"/>
 								<option id="de.innot.avreclipse.linker.option.libs.2030621060" name="Libraries (-l)" superClass="de.innot.avreclipse.linker.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="printf_flt"/>
 								</option>
@@ -75,4 +75,5 @@
 			<resource resourceType="PROJECT" workspacePath="/lab3"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

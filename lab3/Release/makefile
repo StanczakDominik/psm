@@ -49,7 +49,7 @@ all: lab3.elf secondary-outputs
 lab3.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,lab3.map -mmcu=atmega32 -o "lab3.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-gcc -Wl,-Map,lab3.map -Wl,-u,vfprintf -mmcu=atmega32 -o "lab3.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

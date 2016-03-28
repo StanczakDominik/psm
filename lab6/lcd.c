@@ -102,6 +102,3 @@ int lcd_putc(char c, FILE *unused)
 	lcd_write_data(c);
 	return 0;
 }
-
-FILE lcd_stream=FDEV_SETUP_STREAM (lcd_putc, NULL, _FDEV_SETUP_WRITE);
-

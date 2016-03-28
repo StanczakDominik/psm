@@ -1,0 +1,3 @@
+projekt -> c/c++ build -> settings -> tool settings -> avr c linker
+general -> other arguments = "-Wl,-u,vfprintf"
+libraries -> add "printf_flt"
