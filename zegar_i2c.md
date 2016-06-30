@@ -1,0 +1,7 @@
+MISC:
+SCL -> PC0
+SDA -> PC1
+FT -> PD2 (INT0)
+
+LCD:
+RS, E, D4-D7 -> PA2-PA7

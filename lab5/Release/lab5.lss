@@ -3,13 +3,13 @@ lab5.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001f0  00000000  00000000  00000094  2**1
+  0 .text         000001f2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000008  00800060  000001f0  00000284  2**0
+  1 .data         00000008  00800060  000001f2  00000286  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000018  00800068  00800068  0000028c  2**0
+  2 .bss          00000018  00800068  00800068  0000028e  2**0
                   ALLOC
-  3 .comment      00000011  00000000  00000000  0000028c  2**0
+  3 .comment      00000011  00000000  00000000  0000028e  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -49,7 +49,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e0 ef       	ldi	r30, 0xF0	; 240
+  66:	e2 ef       	ldi	r30, 0xF2	; 242
   68:	f1 e0       	ldi	r31, 0x01	; 1
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -72,7 +72,7 @@ Disassembly of section .text:
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 d7 00 	call	0x1ae	; 0x1ae <main>
-  8a:	0c 94 f6 00 	jmp	0x1ec	; 0x1ec <_exit>
+  8a:	0c 94 f7 00 	jmp	0x1ee	; 0x1ee <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -159,7 +159,7 @@ Disassembly of section .text:
  12a:	70 e0       	ldi	r23, 0x00	; 0
  12c:	8c e6       	ldi	r24, 0x6C	; 108
  12e:	90 e0       	ldi	r25, 0x00	; 0
- 130:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <strncmp>
+ 130:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <strncmp>
  134:	89 2b       	or	r24, r25
  136:	51 f4       	brne	.+20     	; 0x14c <__vector_13+0x60>
  138:	8d e2       	ldi	r24, 0x2D	; 45
@@ -174,7 +174,7 @@ Disassembly of section .text:
  152:	70 e0       	ldi	r23, 0x00	; 0
  154:	8c e6       	ldi	r24, 0x6C	; 108
  156:	90 e0       	ldi	r25, 0x00	; 0
- 158:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <strncmp>
+ 158:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <strncmp>
  15c:	89 2b       	or	r24, r25
  15e:	61 f4       	brne	.+24     	; 0x178 <__vector_13+0x8c>
  160:	8b e2       	ldi	r24, 0x2B	; 43
@@ -213,36 +213,37 @@ Disassembly of section .text:
  1ae:	78 94       	sei
  1b0:	a0 9a       	sbi	0x14, 0	; 20
  1b2:	a1 98       	cbi	0x14, 1	; 20
- 1b4:	85 e0       	ldi	r24, 0x05	; 5
- 1b6:	90 e0       	ldi	r25, 0x00	; 0
- 1b8:	0e 94 49 00 	call	0x92	; 0x92 <USART_Init>
- 1bc:	80 91 6a 00 	lds	r24, 0x006A
- 1c0:	90 91 6b 00 	lds	r25, 0x006B
- 1c4:	89 2b       	or	r24, r25
- 1c6:	11 f0       	breq	.+4      	; 0x1cc <main+0x1e>
- 1c8:	a8 98       	cbi	0x15, 0	; 21
- 1ca:	f8 cf       	rjmp	.-16     	; 0x1bc <main+0xe>
- 1cc:	a8 9a       	sbi	0x15, 0	; 21
- 1ce:	f6 cf       	rjmp	.-20     	; 0x1bc <main+0xe>
+ 1b4:	89 9a       	sbi	0x11, 1	; 17
+ 1b6:	85 e0       	ldi	r24, 0x05	; 5
+ 1b8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ba:	0e 94 49 00 	call	0x92	; 0x92 <USART_Init>
+ 1be:	80 91 6a 00 	lds	r24, 0x006A
+ 1c2:	90 91 6b 00 	lds	r25, 0x006B
+ 1c6:	89 2b       	or	r24, r25
+ 1c8:	11 f0       	breq	.+4      	; 0x1ce <main+0x20>
+ 1ca:	a8 98       	cbi	0x15, 0	; 21
+ 1cc:	f8 cf       	rjmp	.-16     	; 0x1be <main+0x10>
+ 1ce:	a8 9a       	sbi	0x15, 0	; 21
+ 1d0:	f6 cf       	rjmp	.-20     	; 0x1be <main+0x10>
 
-000001d0 <strncmp>:
- 1d0:	fb 01       	movw	r30, r22
- 1d2:	dc 01       	movw	r26, r24
- 1d4:	41 50       	subi	r20, 0x01	; 1
- 1d6:	50 40       	sbci	r21, 0x00	; 0
- 1d8:	30 f0       	brcs	.+12     	; 0x1e6 <strncmp+0x16>
- 1da:	8d 91       	ld	r24, X+
- 1dc:	01 90       	ld	r0, Z+
- 1de:	80 19       	sub	r24, r0
- 1e0:	19 f4       	brne	.+6      	; 0x1e8 <strncmp+0x18>
- 1e2:	00 20       	and	r0, r0
- 1e4:	b9 f7       	brne	.-18     	; 0x1d4 <strncmp+0x4>
- 1e6:	88 1b       	sub	r24, r24
- 1e8:	99 0b       	sbc	r25, r25
- 1ea:	08 95       	ret
+000001d2 <strncmp>:
+ 1d2:	fb 01       	movw	r30, r22
+ 1d4:	dc 01       	movw	r26, r24
+ 1d6:	41 50       	subi	r20, 0x01	; 1
+ 1d8:	50 40       	sbci	r21, 0x00	; 0
+ 1da:	30 f0       	brcs	.+12     	; 0x1e8 <strncmp+0x16>
+ 1dc:	8d 91       	ld	r24, X+
+ 1de:	01 90       	ld	r0, Z+
+ 1e0:	80 19       	sub	r24, r0
+ 1e2:	19 f4       	brne	.+6      	; 0x1ea <strncmp+0x18>
+ 1e4:	00 20       	and	r0, r0
+ 1e6:	b9 f7       	brne	.-18     	; 0x1d6 <strncmp+0x4>
+ 1e8:	88 1b       	sub	r24, r24
+ 1ea:	99 0b       	sbc	r25, r25
+ 1ec:	08 95       	ret
 
-000001ec <_exit>:
- 1ec:	f8 94       	cli
+000001ee <_exit>:
+ 1ee:	f8 94       	cli
 
-000001ee <__stop_program>:
- 1ee:	ff cf       	rjmp	.-2      	; 0x1ee <__stop_program>
+000001f0 <__stop_program>:
+ 1f0:	ff cf       	rjmp	.-2      	; 0x1f0 <__stop_program>

@@ -105,6 +105,7 @@ int main()
 //	MCUCR |= (1<<ISC01);
 	DDRC |= (1<<PC0);
 	DDRC &=~ (1<<PC1);
+	DDRD |= (1<<PD1);
 	USART_Init(5);
 	while(1)
 	{
